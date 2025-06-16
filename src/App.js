@@ -18,7 +18,6 @@ export default function App() {
 
   // Function to handle your bill change
   function handleYourTipChange(e) {
-    console.log(e);
     setYourTip(Number(e.target.value));
   }
 
@@ -37,10 +36,10 @@ export default function App() {
   return (
     <div>
       <BillInput bill={bill} onBillChange={handleBillChange} />
-      <SelectPercentage onTipChange={handleYourTipChange}>
+      <SelectPercentage tip={yourTip} onTipChange={handleYourTipChange}>
         How did you like the service?:
       </SelectPercentage>
-      <SelectPercentage onTipChange={handleFriendTipChange}>
+      <SelectPercentage tip={friendTip} onTipChange={handleFriendTipChange}>
         How did your friend like the service?:
       </SelectPercentage>
       {bill > 0 && (
@@ -58,20 +57,17 @@ function BillInput({ bill, onBillChange }) {
   return (
     <div>
       <label>How much was the bill?:</label>
-      <input type="number" onChange={onBillChange} value={bill} />
+      <input type="text" onChange={onBillChange} value={bill} />
     </div>
   );
 }
 
 // Select Percentage Component
-function SelectPercentage({ onTipChange, children }) {
+function SelectPercentage({ tip, onTipChange, children }) {
   return (
     <div>
       <label>{children}</label>
-      <select onChange={onTipChange}>
-        <option disabled selected>
-          -- Select Service Rate --
-        </option>
+      <select value={tip} onChange={onTipChange}>
         <option value="0">Dissatisfied 0%</option>
         <option value="5">It was okay 5%</option>
         <option value="10">It was good 10%</option>
@@ -84,11 +80,9 @@ function SelectPercentage({ onTipChange, children }) {
 // Output Component
 function Output({ bill, tip }) {
   return (
-    <div>
-      <strong>
-        You pay ${bill + tip} (${bill} + ${tip})
-      </strong>
-    </div>
+    <h3>
+      You pay ${bill + tip} (${bill} + ${tip})
+    </h3>
   );
 }
 
