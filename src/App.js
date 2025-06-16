@@ -4,6 +4,7 @@ import { SelectPercentage } from "./Components/SelectPercentage";
 import { Output } from "./Components/Output";
 import { Reset } from "./Components/Reset";
 
+// Main App Component
 export default function App() {
   // State to hold the bill amount
   const [bill, setBill] = useState(0);
@@ -39,13 +40,20 @@ export default function App() {
 
   return (
     <div>
+      {/* // BillInput component for the bill amount */}
       <BillInput bill={bill} onBillChange={handleBillChange} />
+
+      {/* // SelectPercentage component for your tip */}
       <SelectPercentage tip={yourTip} onTipChange={handleYourTipChange}>
         How did you like the service?:
       </SelectPercentage>
+
+      {/* // SelectPercentage component for your friend's tip */}
       <SelectPercentage tip={friendTip} onTipChange={handleFriendTipChange}>
         How did your friend like the service?:
       </SelectPercentage>
+
+      {/* // Only show the output and reset button if the bill is greater than 0 */}
       {bill > 0 && (
         <>
           <Output bill={bill} tip={tip} />
